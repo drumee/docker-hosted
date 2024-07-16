@@ -21,9 +21,11 @@
 - The provided domain name can noyt be shared with existing or futur application
 
 ## Installation 
+Go to you domain provider manager and change the Glu DNS of your domain.
+
 git clone https://github.com/somanos/drumee-docker-compose.git
-% cd drumee-docker-compose
-% cp docker-compose-template.yml docker-compose.yml
+cd drumee-docker-compose
+cp docker-compose-template.yml docker-compose.yml
 open docker-compose and changes values accordingly to you configuration
 save the save then
 % sudo docker-compose -f docker-compose.yml up -d
