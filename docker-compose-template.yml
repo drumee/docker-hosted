@@ -38,17 +38,17 @@ services:
       - DRUMEE_DESCRIPTION=My Drumee Box # Set yours
       - ADMIN_EMAIL=admin@example.org # MANDATORY, set yours
       - ACME_EMAIL_ACCOUNT=user@example.org # default: ADMIN_EMAIL
-      - STORAGE_BACKUP=[user@backup.org:]/path/to/backup # Optonal
-      - DB_BACKUP=[user@backup.org:]/path/to/backup # Optonal
+      - STORAGE_BACKUP="" # Optonal, format [user@backup.org:]/path/to/backup 
+      - DB_BACKUP="" # Optonal, format [user@backup.org:]/path/to/backup 
 
     volumes:
       # Change host volumes accordingly to you configs.
       # It's recommanded to have separated volumes
       # If possible, use good io perfomance for database volume 
       # DO NOT CHANGE right hand values
-      - /path/to/volume/devel/db:/srv/db
-      - /path/to/volume/devel/data:/data
-      - /path/to/volume/devel/exchange:/exchangearea
+      - /path/to/volume/db:/srv/db
+      - /path/to/volume/data:/data
+      - /path/to/volume/exchange:/exchangearea
     entrypoint: /var/lib/drumee/init.d/loader  # Comment this
     #entrypoint: /bin/bash                     # and uncomment this for debug or trouble shootiing
     stdin_open: true 
