@@ -21,7 +21,15 @@
 - The provided domain name can noyt be shared with existing or futur application
 
 ## Installation 
-Go to you domain provider manager and change the Glu DNS of your domain.
+Open your provider's DNS manager.
+- In th DNS zone, remove all existing DNS records
+- Add records A and AAAA (if any) to your domain name
+- Change the GLUE records of your DNS registry as follows: 
+* ns1.your.domain <---> IP4,IP6
+* ns2.your.domain <---> IP4,IP6
+
+Wait the change to take effects. Meanwhile :
+
 ```console
 git clone https://github.com/somanos/drumee-docker-compose.git
 ```
@@ -32,7 +40,8 @@ cd drumee-docker-compose
 cp docker-compose-template.yml docker-compose.yml
 ```
 - open docker-compose and changes values accordingly to you configuration
-- save the save then
+- save the changes. Check that GLUE records has been updated.
+
 ```console
 sudo docker-compose -f docker-compose.yml up -d
 ```
