@@ -33,11 +33,13 @@ services:
       - "PUBLIC_IP4=0.0.0.0"  # set your own 
       - "PUBLIC_IP6=000:000:000:000::" # set your own 
       - DRUMEE_DOMAIN_NAME=examle.org # MANDATORY, DNS domain
-      - DRUMEE_REPO=evaluation.drumee.io # DO NOT CHANGE
+      - DRUMEE_REPO=app.drumee.com # DO NOT CHANGE
       - INFRA_COMPONENTS=all # DO NOT CHANGE
       - DRUMEE_DESCRIPTION=My Drumee Box # Set yours
       - ADMIN_EMAIL=admin@example.org # MANDATORY, set yours
       - ACME_EMAIL_ACCOUNT=user@example.org # default: ADMIN_EMAIL
+      - STORAGE_BACKUP=[user@backup.org:]/path/to/backup # Optonal
+      - DB_BACKUP=[user@backup.org:]/path/to/backup # Optonal
 
     volumes:
       # Change host volumes accordingly to you configs.
