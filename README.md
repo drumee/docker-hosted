@@ -57,5 +57,5 @@ sudo docker compose -f docker-compose.yml up -d
 
 You can follow the installation progress with 
 ```console
-sudo docker logs --follow <docker-name-or-id>
+sudo docker logs --follow drumee
 ```

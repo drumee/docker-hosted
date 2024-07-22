@@ -1,7 +1,7 @@
 version: "3" 
 services:
   drumee:
-    container_name: drumee # or whatever else
+    container_name: drumee 
     image: drumee/stable:latest
     restart: always
     hostname: examle.org   # Change to your domain name
