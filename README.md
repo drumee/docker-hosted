@@ -34,6 +34,9 @@ Wait the change to take effects. Meanwhile :
 git clone https://github.com/somanos/drumee-docker-compose.git
 ```
 ```console
+sudo apt install docker-compose
+```
+```console
 cd drumee-docker-compose
 ```
 ```console
@@ -45,6 +48,7 @@ cp docker-compose-template.yml docker-compose.yml
 ```console
 sudo docker-compose -f docker-compose.yml up -d
 ```
+
 You can follow the installation progress with 
 ```console
 sudo docker logs --follow <docker-name-or-id>

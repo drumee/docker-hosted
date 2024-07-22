@@ -1,5 +1,6 @@
+version: "3" 
 services:
-  drumee-devel:
+  drumee:
     container_name: drumee # or whatever else
     image: drumee/stable:latest
     restart: always
