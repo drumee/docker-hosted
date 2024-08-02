@@ -1,5 +1,17 @@
-# drumee-docker-compose
- Docker compose file for Drumee Installation
+# Docker Compose File Template
+ Docker Compose File to run Drumee in a Container
+
+## Dependencies
+- nginx
+- mariadb
+- nodejs
+- bind9
+- graphicsmagick
+- ffmpeg
+- redis
+- libreoffice
+- postfix
+- opendkim
 
 ## Prerequisite
 ### Settings
@@ -16,10 +28,11 @@
 ### Recommandations
 - Drumee should be installed on a dedicated disks or partitions
 - MFS (/data) should be not installed on the same partition as server (/srv)
-- For if you expect high rate of read/write operations, database base partition (/srv/db) should be installed on a high speed disk or partition.
+- If you expect high rate of read/write operations, database base partition (/srv/db) should be installed on a high speed disk or partition.
 
 ### Caution
-- The provided domain name can noyt be shared with existing or futur application
+- The provided domain name can not be shared with existing or futur application
+- It is recommanded not to share DB server with any other application
 
 ## Installation 
 - Install Docker Engine as per [the offical documentation](https://docs.docker.com/engine/install/debian/)
@@ -32,22 +45,18 @@ Open your provider's DNS manager.
 * ns1.your.domain <---> IP4,IP6
 * ns2.your.domain <---> IP4,IP6
 - Change to name servers fo your domain to ns1.your.domain and ns2.your.domain
-Wait the change to take effects. Meanwhile :
+Wait the change to take effects. Meanwhile, download the Docker Compose Template File from [here](https://github.com/drumee/documentation/blob/main/install/docker/docker-compose-template.yml)
 
-```console
-git clone https://github.com/somanos/drumee-docker-compose.git
-```
-```console
-sudo apt install docker-compose
-```
-```console
-cd drumee-docker-compose
-```
 ```console
 cp docker-compose-template.yml docker-compose.yml
 ```
-- open docker-compose and changes values accordingly to you configuration
-- save the changes. Check that GLUE records has been updated.
+- Use your favorite IDE to change values in *docker-compose.yml* accordingly to your setup. 
+- Save the changes. 
+- Check that GLUE records has been updated.
+
+```console
+sudo apt install docker-compose
+```
 
 **Ensure changes on your Internet Access Provider has been updated.**
 
