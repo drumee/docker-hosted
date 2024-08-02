@@ -45,11 +45,22 @@ Open your provider's DNS manager.
 * ns1.your.domain <---> IP4,IP6
 * ns2.your.domain <---> IP4,IP6
 - Change to name servers fo your domain to ns1.your.domain and ns2.your.domain
-Wait the change to take effects. Meanwhile, download the Docker Compose Template File from [here](https://github.com/drumee/documentation/blob/main/install/docker/docker-compose-template.yml)
+Wait the change to take effects.
+
+Meanwhile, you can preapre the installation envirnoment.
+
+```console
+git clone https://github.com/drumee/docker-compose
+```
+
+```console
+cd docker-compose
+```
 
 ```console
 cp docker-compose-template.yml docker-compose.yml
 ```
+
 - Use your favorite IDE to change values in *docker-compose.yml* accordingly to your setup. 
 - Save the changes. 
 - Check that GLUE records has been updated.
