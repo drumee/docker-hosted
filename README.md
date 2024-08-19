@@ -70,6 +70,7 @@ cp template.yml my-drumee.yml
 ```console
 sudo docker compose -f my-drumee.yml up -d
 ```
+You may need to stop some exissting service on your server, as their ports are conflicting with the ones required by Docker.
 
 You can follow the installation progress with 
 ```console
