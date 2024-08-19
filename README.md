@@ -50,29 +50,29 @@ Wait the change to take effects.
 Meanwhile, you can preapre the installation envirnoment.
 
 ```console
-git clone https://github.com/drumee/docker-install
+git clone https://github.com/drumee/install-docker
 ```
 
 ```console
-cd docker-install
+cd install-docker
 ```
 
 ```console
-cp docker-install-template.yml docker-install.yml
+cp install-docker-template.yml install-docker.yml
 ```
 
-- Use your favorite IDE to change values in *docker-install.yml* accordingly to your setup. 
+- Use your favorite IDE to change values in *install-docker.yml* accordingly to your setup. 
 - Save the changes. 
 - Check that GLUE records has been updated.
 
 ```console
-sudo apt install docker-install
+sudo apt install install-docker
 ```
 
 **Ensure changes on your Internet Access Provider has been updated.**
 
 ```console
-sudo docker compose -f docker-install.yml up -d
+sudo docker compose -f install-docker.yml up -d
 ```
 
 You can follow the installation progress with 
