@@ -65,10 +65,6 @@ cp template.yml my-drumee.yml
 - Save the changes. 
 - Check that GLUE records has been updated.
 
-```console
-sudo apt install install-docker
-```
-
 **Ensure changes on your Internet Access Provider has been updated.**
 
 ```console
