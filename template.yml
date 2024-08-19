@@ -1,0 +1,108 @@
+# Following envornment variables are required by Drumee Desktop Server
+# DRUMEE_DOMAIN_NAME
+# This is the URL base to access your Drumee Instance
+# It's recommanded not to share the domain name 
+# with any oher applications
+
+# PUBLIC_IP4
+# Fix IPV4 address bound to your doamain_name
+
+# PUBLIC_IP6
+# IPV6 address bound to your doamain_name
+
+# ADMIN_EMAIL
+# This email will be use as the admin account
+
+# Dedicated to data base server. Do not share with any
+# other application. Default value is /srv/db. 
+# At least 100GB should be allocated 
+# DRUMEE_DB_DIR="/drumee/db" 
+
+# Mount points
+# /var/mail
+# Drumee uses postfix as MTA, /var/mail is intended to stored data used by postfix
+
+# /srv/db
+# Database volume dedicated to Drumee Filesystem Management. 
+# At least 100GB should be allocated 
+# Do not share with any # other application. 
+
+# /data 
+# Data lake volume dedicated to Drumee content storage
+# Adjust the size accordingly to your requirements
+
+# /exchangearea
+# Volume dedicated to exchange data between Drumee Filesystem and Host Filesystem
+
+# Optional setting
+# Backup mecanism
+# Drumee use rsync to backup data (FMS, DB and configs)
+# If the environment variable DRUMEE_BACKUP_DIR is set, 
+# the backup daemon shall it as backup destination.
+# NOTE: You will have to add a volume moint point to designate the backup location
+# If you plan to make a backup on a remote host, ensure
+# ssh keys are properly setup
+
+# DRUMEE_DESCRIPTION="Drumee Destop"
+# This is a simple text. It will be shown on the login page
+
+# ACME_EMAIL_ACCOUNT
+# SSL certificates are generated using zerossl.com ACME server
+# This requires an emal to be provided.
+# If not set, will be defaulted to ADMIN_EMAIL.
+
+services:
+  drumee:
+    container_name: drumee 
+    image: drumee/stable:latest
+    restart: always
+    hostname: examle.org   # Change to your domain name
+    # If you are behind a firewall you may have to change 
+    # follwings host ports (left hand) accordingly to your networks
+    # configurations
+    # DO NOT CHANGE right hand values
+    ports:   
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "587:587/tcp"
+      - "10000:10000/udp"
+      - "3478:3478/udp"
+      - "443:443/tcp"
+      - "5222:5222/tcp"
+      - "5269:5269/tcp"
+      - "5280:5280/tcp"
+      - "5281:5281/tcp"
+      - "5282:5282/tcp"
+      - "5283:5283/tcp"
+      - "5349:5349/tcp"
+      - "80:80/tcp"
+      - "8080:8080/tcp"
+      - "8888:8888/tcp"
+      - "9090:9090/tcp"
+
+    environment:
+      # At least one public ip adress is require
+      # It's recommanded to have both
+      - "PUBLIC_IP4=0.0.0.0"  # set your own 
+      - "PUBLIC_IP6=000:000:000:000::" # set your own 
+      - DRUMEE_DOMAIN_NAME=examle.org # MANDATORY, DNS domain
+      - DRUMEE_REPO=app.drumee.com # DO NOT CHANGE
+      - INFRA_COMPONENTS=all # DO NOT CHANGE
+      - DRUMEE_DESCRIPTION=My Drumee Box # Set yours
+      - ADMIN_EMAIL=admin@example.org # MANDATORY, set yours
+      - ACME_EMAIL_ACCOUNT=user@example.org # default: ADMIN_EMAIL
+      - STORAGE_BACKUP="" # Optonal, format [user@backup.org:]/path/to/backup 
+      - DB_BACKUP="" # Optonal, format [user@backup.org:]/path/to/backup 
+
+    volumes:
+      # Change host volumes accordingly to you configs.
+      # It's recommanded to have separated volumes
+      # If possible, use good io perfomance for database volume 
+      # DO NOT CHANGE right hand values
+      - /path/to/volume/db:/srv/db
+      - /path/to/volume/data:/data
+      - /path/to/volume/exchange:/exchangearea
+    entrypoint: /var/lib/drumee/init.d/loader  # Comment this
+    #entrypoint: /bin/bash                     # and uncomment this for debug or trouble shootiing
+    stdin_open: true 
+    tty: true 
