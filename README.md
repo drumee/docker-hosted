@@ -16,7 +16,8 @@
 ## Prerequisite
 ### Settings
 - A maiden Internet domain name
-- Control Access to GLU DNS of the Internet domain
+- Control Access to your DNS zone
+- Control Access to your GLU DNS
 - At least one Public IP addresses, IPV4 and/or IPV6
 - Docker Engine version 20 or higher
 
@@ -35,19 +36,61 @@
 - It is recommanded not to share DB server with any other application
 
 ## Installation 
-- Install Docker Engine as per [the offical documentation](https://docs.docker.com/engine/install/debian/)
+### Install Docker 
+You can follow instructions fron [the offical documentation](https://docs.docker.com/engine/install/debian/) or run below commands
+- 
+```console
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
 
-Open your provider's DNS manager.
-- In th DNS zone, remove all existing DNS records
-- Add records A and AAAA (if any) to your domain name
-- Add records A and AAAA to ns1.your.domain and ns2.your.domain 
-- Change the GLUE records of your DNS registry as follows: 
-* ns1.your.domain <---> IP4,IP6
-* ns2.your.domain <---> IP4,IP6
-- Change to name servers fo your domain to ns1.your.domain and ns2.your.domain
+### Setup 
+### Prepare your ISP settings
+
+#### Prepare you IP addresses
+This task depends on your Domain Name Provider. Replace *example.org* by your own domain name. If you don't have IP V6 address, just fill in IPV4 fields.
+The purpose of this task to bind your domain name to the Ip Address of your Drumee Server. 
+
+In th DNS zone, remove all existing DNS records. Then, create following records in your Domain Name Provider:
+
+  | Domain Name      |  Type  | Target             |
+  |------------------|--------|--------------------|
+  | example.org      | A      | your.ip.4.address  |
+  | example.org      | AAAA   | your.ip.6.address  |
+  | ns1.example.org  | A      | your.ip.4.address  |
+  | ns1.example.org  | AAAA   | your.ip.6.address  |
+  | ns2.example.org  | A      | your.ip.4.address  |
+  | ns2.example.org  | AAAA   | your.ip.6.address  |
+
+#### Change the default Domain Name Server (DNS)
+This section will replace your ISP DNS by the one that run on your own Synology NAS. To make this effective, open your ISP interface and change current Name Servers to ns1.example.org and ns2.example.org
+
+#### Change your GLUE DNS
+Open your ISP interface and add following entries:
+- ns1.example.org 
+- ns2.example.org
+
 Wait the change to take effects.
 
-Meanwhile, you can preapre the installation envirnoment.
+#### Check your DNS records
+
+Open a Shell Terminal and run
+
+```console
+nslookup example.org
+```
+If everything is OK, you should see response like below.
+
+Server:		192.168.5.1
+Address:	192.168.5.1#53
+
+Non-authoritative answer:
+Name:	example.org
+Address: *your.ip.4.address*
+Name:	example.org
+Address: *82.65.69.164*
+
+### Prepare Drumee Container
 
 ```console
 git clone https://github.com/drumee/docker-hosted
@@ -58,21 +101,23 @@ cd docker-hosted
 ```
 
 ```console
-cp template.yml my-drumee.yml
+cp template.yml drumee.yml
 ```
 
-- Use your favorite IDE to change values in *install-docker.yml* accordingly to your setup. 
+- Use your favorite IDE to change values in the file *drumee.yml* accordingly to your setup. 
 - Save the changes. 
-- Check that GLUE records has been updated.
 
-**Ensure changes on your Internet Access Provider has been updated.**
 
 ```console
-sudo docker compose -f my-drumee.yml up -d
+sudo docker compose -f drumee.yml up -d
 ```
+
 You may need to stop some exissting service on your server, as their ports are conflicting with the ones required by Docker.
 
-You can follow the installation progress with 
+#### Monitoring Installation Progress
+
 ```console
 sudo docker logs --follow drumee
 ```
+
+Once the installation completed, you will receive a link sent to the *ADMIN_EMAIL*. Click on the link and set the admin pass word. That's it !

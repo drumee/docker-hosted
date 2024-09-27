@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+# This script is a copycat from https://docs.docker.com/engine/install/debian/
+# It has made form your convenience
+# You can refere to Docker offical Documentation for more details
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; 
+    do apt-get remove $pkg; 
+done
+# Add Docker's official GPG key:
+keyrings=/etc/apt/keyrings/docker.asc
+repo=https://download.docker.com/linux/debian
+apt-get update
+apt-get install ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL $repo/gpg -o $keyrings
+chmod a+r $keyrings
+
+# Add the repository to Apt sources:
+arch=$(dpkg --print-architecture)
+src_list=/etc/apt/sources.list.d/docker.list
+release=$(. /etc/os-release && echo "$VERSION_CODENAME")
+echo "deb [arch=$arch signed-by=$keyrings] $repo $release stable" | tee $src_list > /dev/null
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
