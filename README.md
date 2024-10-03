@@ -88,7 +88,7 @@ Non-authoritative answer:
 Name:	example.org
 Address: *your.ip.4.address*
 Name:	example.org
-Address: *82.65.69.164*
+Address: *XX.XX.XX.XXX*
 
 ### Prepare Drumee Container
 
