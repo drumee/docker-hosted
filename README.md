@@ -14,12 +14,7 @@
 - opendkim
 
 ## Prerequisite
-### Settings
-- A maiden Internet domain name
-- Control Access to your DNS zone
-- Control Access to your GLU DNS
-- At least one Public IP addresses, IPV4 and/or IPV6
-- Docker Engine version 20 or higher
+For now, this setup required Debian family plateform
 
 ### Hardware
 - RAM at least 8Go
@@ -44,8 +39,17 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-### Setup 
-### Prepare your ISP settings
+### Setup for Public Domain Name
+This setup is required only if you need to make your server available from the whole Internet. 
+
+If you intent to try Drumee on a local installation, head to 
+
+#### Prerequisite
+- A maiden Internet domain name
+- Control Access to your DNS zone
+- Control Access to your GLU DNS
+- At least one Public IP addresses, IPV4 and/or IPV6
+- Docker Engine version 20 or higher
 
 #### Prepare you IP addresses
 This task depends on your Domain Name Provider. Replace *example.org* by your own domain name. If you don't have IP V6 address, just fill in IPV4 fields.
@@ -121,3 +125,17 @@ sudo docker logs --follow drumee
 ```
 
 Once the installation completed, you will receive a link sent to the *ADMIN_EMAIL*. Click on the link and set the admin pass word. That's it !
+
+
+### Setup for Local Domain Name
+
+### Prepare Drumee Container
+
+```console
+git clone https://github.com/drumee/docker-hosted
+```
+
+```console
+cd docker-hosted
+./install.local.sh
+```
