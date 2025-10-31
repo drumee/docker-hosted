@@ -8,5 +8,5 @@ mkdir -p $HOME/.config/local.drumee/storage/data:/data
 mkdir -p $HOME/.config/local.drumee/storage/exchange:/exchangearea
 mkdir -p $HOME/build/local.drumee:/mnt/devel
 
-sudo docker compose -f my-docker.yaml -d
+sudo docker compose -f my-docker.yaml up -d
 sudo docker logs --follow drumee

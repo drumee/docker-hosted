@@ -1,8 +1,8 @@
 services:
   drumee:
     image: drumee/dist:latest
-    container_name: drumme
-    hostname: drumme
+    container_name: drumee
+    hostname: drumee
     ports:
       - "53:53/udp"
       - "53:53/tcp"
